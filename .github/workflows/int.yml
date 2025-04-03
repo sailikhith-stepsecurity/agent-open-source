@@ -14,7 +14,7 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     steps:
-      - uses: step-security/harden-runner@v2
+      - uses: step-security/harden-runner@v2.11.1
         with:
           egress-policy: audit
       - name: Checkout
@@ -33,6 +33,6 @@ jobs:
           aws-region: us-west-2
       - run: aws s3 cp ./agent s3://step-security-agent/refs/heads/int/agent --acl public-read
       - name: Integration test
-        uses: docker://ghcr.io/step-security/integration-test/int:latest
+        uses: docker://ghcr.io/step-security/integration-test/int:latest@sha256:5ce35f47fe82e6287bc30b6152ad0d9dc352120b47c7464107652aefa8fe8648
         env:
           PAT: ${{ secrets.PAT }}
